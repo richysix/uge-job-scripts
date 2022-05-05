@@ -15,3 +15,13 @@ This runs `get_ensembl_gene_annotation.pl` in the directory in which the `qsub` 
 Run the job with qsub
 
     qsub get_ensembl_gene_annotation.sh
+
+### Get gene features
+
+[get_features_for_genes.sh](get_features_for_genes.sh)
+
+This runs [get_features_for_genes.pl](https://github.com/richysix/analysis-paralogs/blob/main/get_features_for_genes.pl) in the directory in which the `qsub` command is executed. Run `get_features_for_genes.sh -h` to see options for setting the Ensembl version, species and output file name.
+
+[get_features_for_genes-array.sh](get_features_for_genes-array.sh)
+
+This runs [get_features_for_genes.pl](https://github.com/richysix/analysis-paralogs/blob/main/get_features_for_genes.pl) as a job array in the directory in which the `qsub` command is executed. Run `get_features_for_genes-array.sh -h` to see options for setting the Ensembl version, species and output file name. The array task id is added to the output filename. The default number of array tasks is 10. This can be overridden by adding the `-t` option directly to the `qsub` command.
