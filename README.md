@@ -25,3 +25,20 @@ This runs [get_features_for_genes.pl](https://github.com/richysix/analysis-paral
 [get_features_for_genes-array.sh](get_features_for_genes-array.sh)
 
 This runs [get_features_for_genes.pl](https://github.com/richysix/analysis-paralogs/blob/main/get_features_for_genes.pl) as a job array in the directory in which the `qsub` command is executed. Run `get_features_for_genes-array.sh -h` to see options for setting the Ensembl version, species and output file name. The array task id is added to the output filename. The default number of array tasks is 10. This can be overridden by adding the `-t` option directly to the `qsub` command.
+
+### Run GATK ASEReadCounter
+
+[gatk-ase.sh](gatk-ase.sh)
+
+Runs GATK ASEReadCounter.
+
+`gatk-ase.sh -h`
+
+    gatk-ase.sh [options] INPUT_FILE VCF_FILES
+    Options:
+        -o    output file name [default: ase-counts.tsv]
+        -r    reference fasta file [default: /data/SBBS-BuschLab/genomes/GRCz11/GRCz11.fa]
+        -d    print debugging info
+        -q    quiet output
+        -h    print help info
+
