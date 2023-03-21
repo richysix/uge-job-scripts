@@ -63,6 +63,16 @@ Expects a file named `md5sum.txt` in the working directory.
 Script to run FASTQC on all files matching `*.fastq.gz` in the working directory.
 Currently uses 12 threads.
 
-__TO DO__
+_TO DO_  
 Add an option to set the number of threads
+
+### Run MultiQC
+
+[multiqc.sh](multiqc.sh)
+
+Script to run MultiQC. Expects 2 files in the working directory
+
+1. multiqc-input.txt - list of zipped FASTQC files
+1. multiqc-samples.txt - Tab-separated file. 2 columns Run and Sample
+
 
