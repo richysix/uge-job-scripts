@@ -48,3 +48,11 @@ Runs [curl-file-download.sh](https://github.com/richysix/bioinf-gen/blob/master/
 
 Array job to download files in batch. Expects files in the working directory named `curl.\[0-9\]+`
 An individual task downloads the files contained in curl.${SGE_TASK_ID}
+
+### Check md5sums
+
+[check-md5sums.sh](check-md5sums.sh)
+
+Runs md5sum to check integrity of files.
+Expects a file named `md5sum.txt` in the working directory.
+
