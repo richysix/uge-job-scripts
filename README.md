@@ -56,3 +56,13 @@ An individual task downloads the files contained in curl.${SGE_TASK_ID}
 Runs md5sum to check integrity of files.
 Expects a file named `md5sum.txt` in the working directory.
 
+### Run FASTQC
+
+[fastqc.sh](fastqc.sh)
+
+Script to run FASTQC on all files matching `*.fastq.gz` in the working directory.
+Currently uses 12 threads.
+
+__TO DO_
+Add an option to set the number of threads
+
