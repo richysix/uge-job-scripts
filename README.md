@@ -75,4 +75,20 @@ Script to run MultiQC. Expects 2 files in the working directory
 1. multiqc-input.txt - list of zipped FASTQC files
 1. multiqc-samples.txt - Tab-separated file. 2 columns Run and Sample
 
+### Index genome with STAR
 
+[star_ref_index.sh](star_ref_index.sh)
+
+Script to index a genome with star.
+
+    star_ref_index.sh -h
+    
+    star_ref_index.sh [options] REF_URL GTF_URL
+    Options:
+        -n    Name (grcz11)
+        -d    print debugging info
+        -v    verbose output
+        -h    print help info
+
+The script uses the REF_URL and GTF_URL to download the genome FASTA file and a GTF file of the annotation.
+The index is created in a directory set by the `-n` option (default: grcz11)
