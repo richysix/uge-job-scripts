@@ -3,8 +3,6 @@
 #$ -pe smp 1
 #$ -l h_rt=1:0:0
 #$ -l h_vmem=100M
-#$ -o get_features_for_genes.o
-#$ -e get_features_for_genes.e
 
 USAGE="get_features_for_genes.sh [options] input_file"
 
@@ -66,20 +64,25 @@ if [[ -z $ENSEMBL ]]; then ENSEMBL=106; fi
 if [[ -z $SPECIES ]]; then SPECIES='danio_rerio'; fi
 if [[ -z $OUTPUT_FILE ]]; then OUTPUT_FILE='gene-features.tsv'; fi
 
-if [[ $verbose -gt 0 ]]; then
-  echo "Ensembl version = $ENSEMBL
-Species = $SPECIES
-Output file = $OUTPUT_FILE"
-fi
-
 INPUT_FILE=$1
 if [[ ! -e $INPUT_FILE ]];then 
   echo "$INPUT_FILE does not exist!" >&2 
   exit 2
 fi
 
+if [[ $verbose -gt 0 ]]; then
+  echo "Debug = $debug
+Ensembl version = $ENSEMBL
+Species = $SPECIES
+Output file = $OUTPUT_FILE
+Input file = $INPUT_FILE"
+fi
+
+DEBUG=''
+if [[ $debug -eq 1 ]]; then DEBUG='--debug'; fi
+
 module purge
 module load Ensembl/$ENSEMBL
 
-perl $HOME/checkouts/analysis-paralogs/get_features_for_genes.pl --species $SPECIES \
---output_file $OUTPUT_FILE $INPUT_FILE
+perl $HOME/checkouts/analysis-paralogs/get_features_for_genes.pl $DEBUG \
+--species $SPECIES --output_file $OUTPUT_FILE $INPUT_FILE

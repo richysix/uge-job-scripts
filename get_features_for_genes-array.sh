@@ -3,8 +3,6 @@
 #$ -pe smp 1
 #$ -l h_rt=1:0:0
 #$ -l h_vmem=100M
-#$ -o get_features_for_genes.o
-#$ -e get_features_for_genes.e
 #$ -t 1-10
 
 USAGE="get_features_for_genes.sh [options] input_file"
@@ -68,12 +66,6 @@ if [[ -z $SPECIES ]]; then SPECIES='danio_rerio'; fi
 if [[ -z $OUTPUT_FILE ]]; then OUTPUT_FILE='gene-features.tsv'; fi
 OUTPUT_FILE="${OUTPUT_FILE}.${SGE_TASK_ID}"
 
-if [[ $verbose -gt 0 ]]; then
-  echo "Ensembl version = $ENSEMBL
-Species = $SPECIES
-Output file = $OUTPUT_FILE"
-fi
-
 FOFN=$1
 if [[ ! -e $FOFN ]];then 
   echo "$FOFN does not exist!" >&2 
@@ -81,6 +73,18 @@ if [[ ! -e $FOFN ]];then
 fi
 
 INPUT_FILE=$(sed -n "${SGE_TASK_ID}p" $FOFN)
+if [[ ! -e $INPUT_FILE ]];then 
+  echo "$INPUT_FILE does not exist!" >&2 
+  exit 2
+fi
+
+
+if [[ $verbose -gt 0 ]]; then
+  echo "Ensembl version = $ENSEMBL
+Species = $SPECIES
+Output file = $OUTPUT_FILE
+Input file = $INPUT_FILE"
+fi
 
 module purge
 module load Ensembl/$ENSEMBL
