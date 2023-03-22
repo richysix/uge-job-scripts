@@ -17,6 +17,6 @@
 #
 #  The GNU General Public License, Version 3, June 2007
 
-module load MultiQC
+module load MultiQC/1.10.1
 
 multiqc --file-list multiqc-input.txt --sample-names multiqc-samples.txt -m fastqc
