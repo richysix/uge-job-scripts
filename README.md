@@ -92,3 +92,32 @@ Script to index a genome with star.
 
 The script uses the REF_URL and GTF_URL to download the genome FASTA file and a GTF file of the annotation.
 The index is created in a directory set by the `-n` option (default: grcz11)
+
+### Run STAR
+
+We run STAR with a 2-pass strategy. The first pass maps reads and discovers new splice junctions at the same time.
+These splice junctions are used in the second pass to improve mapping.
+
+[star1.sh](star1.sh)
+
+This script expects a file named `fastq.tsv` in the working directory.
+
+`fastq.tsv` should have 3 columns
+
+1. Sample name
+1. Read 1 files. A comma-separated list of all the read1 fastq files
+1. Read 2 files. A comma-separated list of all the read2 fastq files
+
+To run the script supply a line number from the `fastq.tsv` file.  
+e.g. `star1.sh 2` will take the sample name and fastq files from the second line of `fastq.tsv` and run STAR using those arguments.
+
+[star1-array.sh](star1-array.sh)
+
+This script runs star1.sh for multiple samples as an array job
+
+e.g.
+```
+qsub -t1-12 star1-array.sh
+```
+This will run 12 jobs taking the input parameters from lines 1 to 12 of `fastq.tsv`
+The default number of jobs is 1-96
