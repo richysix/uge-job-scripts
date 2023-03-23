@@ -121,3 +121,21 @@ qsub -t1-12 star1-array.sh
 ```
 This will run 12 jobs taking the input parameters from lines 1 to 12 of `fastq.tsv`
 The default number of jobs is 1-96
+
+Once this is complete STAR is run again using the splice junction output of the first run.
+
+[star2.sh](star1.sh)
+
+This is the same as star1.sh, but with the added option `--sjdbFileChrStartEnd` and the splice junction file names.
+
+[star2-array.sh](star2-array.sh)
+
+This script runs star2.sh for multiple samples as an array job
+
+e.g.
+```
+qsub -t1-12 star2-array.sh
+```
+This will run 12 jobs taking the input parameters from lines 1 to 12 of `fastq.tsv`
+The default number of jobs is 1-96
+
