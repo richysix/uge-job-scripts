@@ -4,6 +4,14 @@
 #$ -l h_rt=1:0:0
 #$ -l h_vmem=275M
 
+module load FastQC
+
+fastqc --quiet --threads 12 --noextract *.fastq.gz
+
+## TO DO
+# Make -t an option to set the number of threads
+
+
 # AUTHOR
 #
 # Richard White <rich@buschlab.org>
@@ -16,9 +24,3 @@
 #
 #  The GNU General Public License, Version 3, June 2007
 
-module load FastQC
-
-fastqc --quiet --threads 12 --noextract *.fastq.gz
-
-## TO DO
-# Make -t an option to set the number of threads
