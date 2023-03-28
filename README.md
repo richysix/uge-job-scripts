@@ -150,3 +150,19 @@ qsub -t1-12 star2-array.sh
 This will run 12 jobs taking the input parameters from lines 1 to 12 of `fastq.tsv`
 The default number of jobs is 1-96
 
+## GenMap
+
+[GenMap](https://github.com/cpockrandt/genmap) calculates mappability scores for genome sequences
+
+### Index genome
+
+[genemap_index.sh](genemap_index.sh)
+
+This indexes the supplied genome fasta file
+
+[genemap.sh](genemap.sh)
+
+This runs GenMap to calculate mappability given a specific kmer length (-k) and number of mismatches (-e)
+
+e.g. `qsub ~/checkouts/uge-job-scripts/genmap.sh -k 75 -e 2 /data/scratch/bty114/projects/genomes/GRCz11/genmap-grcz11 mappability`
+
