@@ -2,6 +2,25 @@
 
 Job submission scripts for use with Univa Grid Engine
 
+## General
+
+### Download files with curl
+
+Runs [curl-file-download.sh](https://github.com/richysix/bioinf-gen/blob/master/curl-file-download.sh) from [richysix/bioinf-gen](https://github.com/richysix/bioinf-gen/blob/master/curl-file-download.sh).
+
+Array job to download files in batch. Expects files in the working directory named `curl.\[0-9\]+`
+An individual task downloads the files contained in curl.${SGE_TASK_ID}
+
+### Check md5sums
+
+[check-md5sums.sh](check-md5sums.sh)
+
+Runs md5sum to check integrity of files.
+Expects a file named `md5sum.txt` in the working directory.
+
+
+## Ensembl
+
 ### Get gene annotation from Ensembl
 
 [get_ensembl_gene_annotation.sh](get_ensembl_gene_annotation.sh)
@@ -26,6 +45,8 @@ This runs [get_features_for_genes.pl](https://github.com/richysix/analysis-paral
 
 This runs [get_features_for_genes.pl](https://github.com/richysix/analysis-paralogs/blob/main/get_features_for_genes.pl) as a job array in the directory in which the `qsub` command is executed. Run `get_features_for_genes-array.sh -h` to see options for setting the Ensembl version, species and output file name. The array task id is added to the output filename. The default number of array tasks is 10. This can be overridden by adding the `-t` option directly to the `qsub` command.
 
+## GATK
+
 ### Run GATK ASEReadCounter
 
 [gatk-ase.sh](gatk-ase.sh)
@@ -42,21 +63,9 @@ Runs GATK ASEReadCounter.
         -q    quiet output
         -h    print help info
 
-### Download files with curl
+## QC
 
-Runs [curl-file-download.sh](https://github.com/richysix/bioinf-gen/blob/master/curl-file-download.sh) from [richysix/bioinf-gen](https://github.com/richysix/bioinf-gen/blob/master/curl-file-download.sh).
-
-Array job to download files in batch. Expects files in the working directory named `curl.\[0-9\]+`
-An individual task downloads the files contained in curl.${SGE_TASK_ID}
-
-### Check md5sums
-
-[check-md5sums.sh](check-md5sums.sh)
-
-Runs md5sum to check integrity of files.
-Expects a file named `md5sum.txt` in the working directory.
-
-### Run FASTQC
+### FASTQC
 
 [fastqc.sh](fastqc.sh)
 
@@ -66,7 +75,7 @@ Currently uses 12 threads.
 _TO DO_  
 Add an option to set the number of threads
 
-### Run MultiQC
+### MultiQC
 
 [multiqc.sh](multiqc.sh)
 
@@ -74,6 +83,8 @@ Script to run MultiQC. Expects 2 files in the working directory
 
 1. multiqc-input.txt - list of zipped FASTQC files
 1. multiqc-samples.txt - Tab-separated file. 2 columns Run and Sample
+
+## RNA-seq
 
 ### Index genome with STAR
 
