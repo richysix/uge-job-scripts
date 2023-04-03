@@ -58,10 +58,35 @@ Runs GATK ASEReadCounter.
     gatk-ase.sh [options] INPUT_FILE VCF_FILES
     Options:
         -o    output file name [default: ase-counts.tsv]
-        -r    reference fasta file [default: /data/SBBS-BuschLab/genomes/GRCz11/GRCz11.fa]
+        -r    reference fasta file [default: $SHARED/genomes/GRCz11/GRCz11.fa]
         -d    print debugging info
         -q    quiet output
         -h    print help info
+
+### GATK SplitNCigarReads
+
+[gatk-split_n_cigar_reads.sh](gatk-split_n_cigar_reads.sh)
+Runs GATK SplitNCigarReads to deal with RNA-seq reads that span splice junctions.
+
+`gatk-split_n_cigar_reads.sh -h`
+
+    gatk-split_n_cigar_reads.sh [options] INPUT_BAM OUTPUT_BAM
+    
+    Options:
+        -r    reference fasta file [default: /data/SBBS-BuschLab/genomes/GRCz11/GRCz11.fa]
+        -d    print debugging info
+        -q    turn off verbose output
+        -h    print help info
+    
+[gatk-split_n_cigar_reads-array.sh](gatk-split_n_cigar_reads-array.sh)
+
+Runs gatk-split_n_cigar_reads.sh as an array job.
+Expects a file in the working directory called `bams.tsv`.
+It should have 3 columns
+
+1. path to input bam file
+1. path to output bam file
+1. path to genome reference fasta file
 
 ## QC
 
