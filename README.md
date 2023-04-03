@@ -150,6 +150,24 @@ qsub -t1-12 star2-array.sh
 This will run 12 jobs taking the input parameters from lines 1 to 12 of `fastq.tsv`
 The default number of jobs is 1-96
 
+## SAMTOOLS
+
+### Index
+
+[samtools_index.sh](samtools_index.sh)
+
+`samtools index` can be run with option `-M`, which means all arguments are treated as bam files to index
+Alternatively, it expects a single bam file and optionally a name for the index.
+The `samtools_index.sh` script can be run both ways as well
+
+e.g.
+```
+qsub ~/checkouts/uge-job-scripts/samtools_index.sh -M \
+$( find ./ -type f -name "Aligned.sortedByCoord.out.bam" | sort -V | tr '\n' ';' | sed -e 's|;| |g' )
+
+qsub ~/checkouts/uge-job-scripts/samtools_index.sh in.bam out.bai
+```
+
 ## GenMap
 
 [GenMap](https://github.com/cpockrandt/genmap) calculates mappability scores for genome sequences
