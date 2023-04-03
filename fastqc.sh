@@ -8,9 +8,11 @@ module load FastQC
 
 fastqc --quiet --threads 12 --noextract *.fastq.gz
 
-## TO DO
-# Make -t an option to set the number of threads
-
+fastqc_error=$?
+if [[ $fastqc_error -gt 0 ]]; then
+    echo "FASTQC FAILED" 1>&2
+    exit $fastqc_error
+fi
 
 # AUTHOR
 #

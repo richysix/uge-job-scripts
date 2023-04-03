@@ -9,8 +9,13 @@
 
 USAGE="star1-array.sh"
 
-star1.sh ${SGE_TASK_ID}
+source bash_functions.sh
 
+star1.sh ${SGE_TASK_ID}
+SUCCESS=$?
+
+verbose=1
+error_checking $SUCCESS "job star1, task ${SGE_TASK_ID} succeeded." "job star1, task ${SGE_TASK_ID} failed: $?"
 
 # AUTHOR
 #
