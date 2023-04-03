@@ -166,3 +166,17 @@ This runs GenMap to calculate mappability given a specific kmer length (-k) and 
 
 e.g. `qsub ~/checkouts/uge-job-scripts/genmap.sh -k 75 -e 2 /data/scratch/bty114/projects/genomes/GRCz11/genmap-grcz11 mappability`
 
+
+## Bed file tools
+
+### bigWigToBedGraph
+
+[bigWigToBedGraph.sh](bigWigToBedGraph.sh)
+
+The script runs bigWigToBedGraph. It expects 2 arguments, INPUT FILE and OUTPUT FILE
+
+e.g.
+```
+qsub bigWigToBedGraph.sh wgEncodeCrgMapabilityAlign50mer.bigWig wgEncodeCrgMapabilityAlign50mer.bedGraph
+```
+
