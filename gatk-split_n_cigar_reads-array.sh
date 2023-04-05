@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# gatk-split_n_cigar_reads-array.sh - Script to run STAR as an array job
+# gatk-split_n_cigar_reads-array.sh - Script to run GATK SplitNCigarReads as an array job
 # see gatk-split_n_cigar_reads.sh for details
 #$ -cwd
 #$ -pe smp 1
@@ -21,7 +21,7 @@ else
     REF="-r $ref"
 fi
 
-gatk-split_n_cigar_reads.sh -q $REF $in_bam $out_bam
+../scripts/gatk-split_n_cigar_reads.sh -q $REF $in_bam $out_bam
 SUCCESS=$?
 
 error_checking $SUCCESS "job ${JOB_NAME} ${SGE_TASK_ID} succeeded" "job ${JOB_NAME} ${SGE_TASK_ID} failed: $?"
