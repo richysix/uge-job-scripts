@@ -21,7 +21,10 @@ else
     REF="-r $ref"
 fi
 
-gatk-split_n_cigar_reads.sh -v $REF $in_bam $out_bam
+gatk-split_n_cigar_reads.sh -q $REF $in_bam $out_bam
+SUCCESS=$?
+
+error_checking $SUCCESS "job ${JOB_NAME} ${SGE_TASK_ID} succeeded" "job ${JOB_NAME} ${SGE_TASK_ID} failed: $?"
 
 # AUTHOR
 #
