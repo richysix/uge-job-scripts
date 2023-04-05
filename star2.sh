@@ -15,6 +15,12 @@
 
 USAGE="star2.sh LINE_NUM"
 
+# expects a file named fastq.tsv
+if [[ ! -e fastq.tsv ]]; then
+    echo "File fastq.tsv not found!"
+    exit 2
+fi
+
 line=`sed "${1}q;d" fastq.tsv`
 sample=`echo $line | awk '{ print $1 }'`
 fastq1=`echo $line | awk '{ print $2 }'`
