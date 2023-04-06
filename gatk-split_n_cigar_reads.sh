@@ -53,7 +53,7 @@ fi
 eval $CMD
 SUCCESS=$?
 
-error_checking $SUCCESS "job ${JOB_NAME} succeeded" "job ${JOB_NAME} failed: $?"
+error_checking $SUCCESS "job ${JOB_NAME} succeeded" "job ${JOB_NAME} failed: $SUCCESS"
 
 # AUTHOR
 #

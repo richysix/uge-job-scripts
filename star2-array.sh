@@ -12,9 +12,10 @@ USAGE="star2-array.sh"
 source bash_functions.sh
 
 star2.sh ${SGE_TASK_ID}
+SUCCESS=$?
 
 verbose=1
-error_checking $? "job star2, task ${SGE_TASK_ID} SUCCEEDED." "job star2, task ${SGE_TASK_ID} FAILED: $?"
+error_checking $SUCCESS "job star2, task ${SGE_TASK_ID} SUCCEEDED." "job star2, task ${SGE_TASK_ID} FAILED: $SUCCESS"
 
 # AUTHOR
 #

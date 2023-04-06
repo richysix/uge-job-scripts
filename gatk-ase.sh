@@ -100,4 +100,4 @@ if [[ $debug -gt 0 ]]; then
   echo "Command to run = $CMD"
 fi
 
-$CMD
+eval $CMD

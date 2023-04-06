@@ -22,45 +22,24 @@ USAGE="star_ref_index.sh [options] REF_URL GTF_URL"
 OPTIONS="Options:
     -n    Name (grcz11)
     -d    print debugging info
-    -v    verbose output
+    -v    quite output
+    -v    verbose output [default]
     -h    print help info"
 
 # default values
 debug=0
-verbose=0
+verbose=1
 NAME=grcz11
 
-while getopts "n:dhv" opt; do
+while getopts ":n:dhqv" opt; do
   case $opt in
-    n)
-      NAME=$OPTARG
-      ;;
-    d)
-      debug=1
-      ;;
-    h)
-      echo ""
-      echo "$USAGE"
-      echo "$OPTIONS"
-      exit 1
-      ;;
-    v)
-      verbose=1
-      ;;
-    \?)
-      echo ""
-      echo "Invalid option: -$OPTARG" >&2
-      echo "$USAGE" >&2
-      echo "$OPTIONS" >&2
-      exit 1
-      ;;
-    :)
-      echo ""
-      echo "Option -$OPTARG requires an argument!" >&2
-      echo "$USAGE" >&2
-      echo "$OPTIONS" >&2
-      exit 1
-      ;;
+    n) NAME=$OPTARG ;;
+    d) debug=1 ;;
+    h) echo ""; echo "$USAGE"; echo "$OPTIONS"; exit 1 ;;
+    q) verbose=0 ;;
+    v) verbose=1 ;;
+    \?) echo ""; echo "Invalid option: -$OPTARG" >&2; echo "$USAGE" >&2; echo "$OPTIONS" >&2; exit 1 ;;
+    :) echo ""; echo "Option -$OPTARG requires an argument!" >&2; echo "$USAGE" >&2; echo "$OPTIONS" >&2; exit 1 ;;
   esac
 done
 shift "$(($OPTIND -1))"
@@ -136,4 +115,4 @@ CMD="STAR \
 --sjdbOverhang 74"
 
 eval $CMD
-error_checking $? "STAR command succeeded." "STAR command failed: $?"
+error_checking $? "STAR index command succeeded." "STAR index command failed: $?"

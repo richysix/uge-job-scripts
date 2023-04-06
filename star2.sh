@@ -25,7 +25,7 @@ line=`sed "${1}q;d" fastq.tsv`
 sample=`echo $line | awk '{ print $1 }'`
 fastq1=`echo $line | awk '{ print $2 }'`
 fastq2=`echo $line | awk '{ print $3 }'`
-mkdir $sample
+mkdir -p $sample
 
 module load STAR
 STAR \

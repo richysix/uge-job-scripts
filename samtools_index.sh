@@ -38,7 +38,7 @@ module load samtools/1.17
 samtools index $mode $@
 SUCCESS=$?
 
-error_checking $SUCCESS "job ${JOB_NAME} succeeded" "job ${JOB_NAME} failed: $?"
+error_checking $SUCCESS "job ${JOB_NAME} succeeded" "job ${JOB_NAME} failed: $SUCCESS"
 
 # AUTHOR
 #
