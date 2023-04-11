@@ -35,38 +35,13 @@ OPTIONS="Options:
 
 while getopts "o:r:dhq" opt; do
   case $opt in
-    o)
-      OUTPUT_FILE=$OPTARG
-      ;;
-    r)
-      REF_FILE=$OPTARG
-      ;;
-    d)
-      debug=1
-      ;;
-    h)
-      echo ""
-      echo "$USAGE"
-      echo "$OPTIONS"
-      exit 1
-      ;;
-    q)
-      verbose=0
-      ;;
-    \?)
-      echo ""
-      echo "Invalid option: -$OPTARG" >&2
-      echo "$USAGE" >&2
-      echo "$OPTIONS" >&2
-      exit 1
-      ;;
-    :)
-      echo ""
-      echo "Option -$OPTARG requires an argument!" >&2
-      echo "$USAGE" >&2
-      echo "$OPTIONS" >&2
-      exit 1
-      ;;
+    o) OUTPUT_FILE=$OPTARG ;;
+    r) REF_FILE=$OPTARG ;;
+    d) debug=1 ;;
+    h) echo ""; echo "$USAGE"; echo "$OPTIONS"; exit 1 ;;
+    q) verbose=0 ;;
+    \?) echo ""; echo "Invalid option: -$OPTARG" >&2; echo "$USAGE" >&2; echo "$OPTIONS" >&2; exit 1 ;;
+    :)  echo ""; echo "Option -$OPTARG requires an argument!" >&2; echo "$USAGE" >&2; echo "$OPTIONS" >&2; exit 1 ;;
   esac
 done
 shift "$(($OPTIND -1))"
@@ -91,6 +66,7 @@ module purge
 module load GATK
 
 CMD="gatk ASEReadCounter \
+-U ALLOW_N_CIGAR_READS \
 --input $INPUT_FILE \
 $VAR_OPT_STRING \
 --output $OUTPUT_FILE \
