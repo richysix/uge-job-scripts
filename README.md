@@ -193,6 +193,23 @@ $( find ./ -type f -name "Aligned.sortedByCoord.out.bam" | sort -V | tr '\n' ';'
 qsub ~/checkouts/uge-job-scripts/samtools_index.sh in.bam out.bai
 ```
 
+### Add Read Groups
+
+[add_read_groups.sh](add_read_groups.sh) runs `samtools addreplacerg`  
+It expects 3 arguments
+
+1. Read group tag e.g. '@RG\tID:samplename\tSM:samplename'
+1. Input bam filename
+1. Output bam filename
+
+[add_read_groups-array.sh](add_read_groups-array.sh) runs `add_read_groups.sh` in batch.  
+It expects a filename as the only argument. This should be a file with 3 columns.
+
+1. Input bam filename
+1. Output bam filename
+1. Read group tag e.g. '@RG\tID:samplename\tSM:samplename'
+
+
 ## GenMap
 
 [GenMap](https://github.com/cpockrandt/genmap) calculates mappability scores for genome sequences
