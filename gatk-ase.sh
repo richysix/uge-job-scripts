@@ -6,17 +6,7 @@
 
 # gatk-ase.sh - Script to run GATK ASEReadCounter tool using UGE
 
-# AUTHOR
-#
-# Richard White <rich@buschlab.org>
-#
-# COPYRIGHT AND LICENSE
-#
-# This software is Copyright (c) 2023. Queen Mary University of London.
-#
-# This is free software, licensed under:
-#
-#  The GNU General Public License, Version 3, June 2007
+source bash_functions.sh
 
 USAGE="gatk-ase.sh [options] INPUT_FILE VCF_FILES"
 
@@ -66,7 +56,6 @@ module purge
 module load GATK
 
 CMD="gatk ASEReadCounter \
--U ALLOW_N_CIGAR_READS \
 --input $INPUT_FILE \
 $VAR_OPT_STRING \
 --output $OUTPUT_FILE \
@@ -77,3 +66,18 @@ if [[ $debug -gt 0 ]]; then
 fi
 
 eval $CMD
+SUCCESS=$?
+
+error_checking $SUCCESS "job gatk-ase succeeded." "job gatk-ase failed: $SUCCESS"
+
+# AUTHOR
+#
+# Richard White <rich@buschlab.org>
+#
+# COPYRIGHT AND LICENSE
+#
+# This software is Copyright (c) 2023. Queen Mary University of London.
+#
+# This is free software, licensed under:
+#
+#  The GNU General Public License, Version 3, June 2007
