@@ -43,6 +43,7 @@ samtools addreplacerg -r $RG_TAG -o $OUT_BAM $IN_BAM
 SUCCESS=$?
 
 error_checking $SUCCESS "job add_read_groups succeeded." "job add_read_groups failed: $SUCCESS"
+exit $SUCCESS
 
 # AUTHOR
 #

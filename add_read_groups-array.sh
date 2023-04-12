@@ -13,7 +13,12 @@ in_bam=`echo $line | awk '{ print $1 }'`
 out_bam=`echo $line | awk '{ print $2 }'`
 rg_tag=`echo $line | awk '{ print $3 }'`
 
-sh add_read_groups.sh $rg_tag $in_bam $out_bam
+sh add_read_groups.sh -q $rg_tag $in_bam $out_bam
+SUCCESS=$?
+
+verbose=1
+error_checking $SUCCESS "job add_read_groups, task ${SGE_TASK_ID}, succeeded." "job add_read_groups, task ${SGE_TASK_ID}, failed: $SUCCESS"
+exit $SUCCESS
 
 # AUTHOR
 #
