@@ -10,7 +10,6 @@ source bash_functions.sh
 USAGE="add_read_groups.sh rg_tag in_bam out_bam"
 
 OPTIONS="Options:
-    -r    read group text
     -d    print debugging info
     -v    verbose output
     -q    turn verbose output off
