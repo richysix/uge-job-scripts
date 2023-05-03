@@ -106,10 +106,9 @@ error_checking $? "Created directory, $NAME." "Couldn't create directory, $NAME:
 
 module load STAR
 CMD="STAR \
---outFileNamePrefix $NAME. \
 --runThreadN 4 \
 --runMode genomeGenerate \
---genomeDir grcz11 \
+--genomeDir $NAME \
 --genomeFastaFiles $REF_FILE \
 --sjdbGTFfile $GTF_FILE \
 --sjdbOverhang 74"
