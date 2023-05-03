@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #$ -cwd
 #$ -pe smp 1
-#$ -l h_rt=1:0:0
-#$ -l h_vmem=2G
+#$ -l h_rt=240:0:0
+#$ -l h_vmem=4.4G
 
 # gatk-ase.sh - Script to run GATK ASEReadCounter tool using UGE
 
@@ -23,7 +23,7 @@ OPTIONS="Options:
     -q    quiet output
     -h    print help info"
 
-while getopts "o:r:dhq" opt; do
+while getopts ":o:r:dhq" opt; do
   case $opt in
     o) OUTPUT_FILE=$OPTARG ;;
     r) REF_FILE=$OPTARG ;;
@@ -55,7 +55,7 @@ fi
 module purge
 module load GATK
 
-CMD="gatk ASEReadCounter \
+CMD="gatk --java-options "-Xmx4G" ASEReadCounter \
 --input $INPUT_FILE \
 $VAR_OPT_STRING \
 --output $OUTPUT_FILE \
@@ -69,6 +69,7 @@ eval $CMD
 SUCCESS=$?
 
 error_checking $SUCCESS "job gatk-ase succeeded." "job gatk-ase failed: $SUCCESS"
+exit $SUCCESS
 
 # AUTHOR
 #
