@@ -29,6 +29,11 @@ STAR \
 --quantMode GeneCounts \
 --outSAMtype BAM SortedByCoordinate
 
+SUCCESS=$?
+
+error_checking $SUCCESS "job star1 SUCCEEDED." "job star1 FAILED: $SUCCESS"
+exit $SUCCESS
+
 # AUTHOR
 #
 # Richard White <rich@buschlab.org>
