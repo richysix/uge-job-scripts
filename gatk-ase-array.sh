@@ -7,9 +7,9 @@
 
 # gatk-ase-array.sh - Script to run GATK ASEReadCounter tool using UGE
 
-source bash_functions.sh
-
 USAGE="gatk-ase-array.sh [options] FILE"
+
+source bash_functions.sh
 
 # default values
 debug=0
@@ -28,9 +28,9 @@ while getopts ":r:dvqh" opt; do
     d) debug=1 ;;
     v) verbose=1 ;;
     q) verbose=0 ;;
-    h) echo ""; echo "$USAGE"; echo "$OPTIONS"; exit 1 ;;
-    \?) echo ""; echo "Invalid option: -$OPTARG" >&2; echo "$USAGE" >&2; echo "$OPTIONS" >&2; exit 1 ;;
-    :)  echo ""; echo "Option -$OPTARG requires an argument!" >&2; echo "$USAGE" >&2; echo "$OPTIONS" >&2; exit 1 ;;
+    h)  usage "" ;;
+    \?) usage "Invalid option: -$OPTARG" ;;
+    :)  usage "Option -$OPTARG requires an argument!" ;;
   esac
 done
 shift "$(($OPTIND -1))"
