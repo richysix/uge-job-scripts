@@ -7,11 +7,42 @@
 #$ -l h_vmem=24G
 #$ -t 1-96
 
-USAGE="star2-array.sh"
+USAGE="star2-array.sh [options]"
 
 source bash_functions.sh
 
-star2.sh ${SGE_TASK_ID}
+OPTIONS="Options:
+    -t    turn on TranscriptomeSAM quant mode
+    -d    print debugging info"
+
+# default values
+debug=0
+t=""
+
+while getopts ":td" opt; do
+  case $opt in
+    t)  t="-t" ;;
+    d)  debug=1  ;;
+  esac
+done
+shift "$(($OPTIND -1))"
+
+# expects a file named fastq.tsv
+if [[ ! -e fastq.tsv ]]; then
+    echo "File fastq.tsv not found!"
+    exit 2
+fi
+
+line=`sed "${SGE_TASK_ID}q;d" fastq.tsv`
+sample=`echo $line | awk '{ print $1 }'`
+fastq1=`echo $line | awk '{ print $2 }'`
+fastq2=`echo $line | awk '{ print $3 }'`
+
+if [[ $debug -eq 1 ]]; then
+    echo $t $sample $fastq1 $fastq2
+fi
+
+sh star2.sh -q $t $sample $fastq1 $fastq2
 SUCCESS=$?
 
 verbose=1

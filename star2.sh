@@ -13,18 +13,40 @@
 #$ -l h_rt=1:0:0
 #$ -l h_vmem=24G
 
-USAGE="star2.sh LINE_NUM"
+USAGE="star2.sh [options] sample fastq1 fastq2"
 
-# expects a file named fastq.tsv
-if [[ ! -e fastq.tsv ]]; then
-    echo "File fastq.tsv not found!"
-    exit 2
-fi
+source bash_functions.sh
 
-line=`sed "${1}q;d" fastq.tsv`
-sample=`echo $line | awk '{ print $1 }'`
-fastq1=`echo $line | awk '{ print $2 }'`
-fastq2=`echo $line | awk '{ print $3 }'`
+OPTIONS="Options:
+    -t    turn on TranscriptomeSAM quant mode
+    -d    print debugging info
+    -v    verbose output
+    -q    turn verbose output off
+    -h    print help info"
+
+# default values
+debug=0
+verbose=1
+transcriptomeSAM=""
+
+while getopts ":tdhqv" opt; do
+  case $opt in
+    t)  transcriptomeSAM='transcriptomeSAM' ;;
+    d)  debug=1  ;;
+    h)  usage "" ;;
+    q)  verbose=0 ;;
+    v)  verbose=1 ;;
+    \?) usage "Invalid option: -$OPTARG" ;;
+    :)  usage "Option -$OPTARG requires an argument!" ;;
+  esac
+done
+shift "$(($OPTIND -1))"
+
+# unpack arguments
+sample=$1
+fastq1=$2
+fastq2=$3
+
 mkdir -p $sample
 
 module load STAR
@@ -34,10 +56,13 @@ STAR \
 --readFilesIn $fastq1 $fastq2 \
 --readFilesCommand zcat \
 --outFileNamePrefix $sample/ \
---quantMode GeneCounts \
+--quantMode $transcriptomeSAM GeneCounts \
 --outSAMtype BAM SortedByCoordinate \
 --sjdbFileChrStartEnd `find ../star1 | grep SJ.out.tab$ | sort | tr '\n' ' '`
 
+SUCCESS=$?
+error_checking $SUCCESS "job star2 SUCCEEDED." "job star2 FAILED: $SUCCESS"
+exit $SUCCESS
 
 # AUTHOR
 #
