@@ -18,6 +18,31 @@ An individual task downloads the files contained in curl.${SGE_TASK_ID}
 Runs md5sum to check integrity of files.
 Expects a file named `md5sum.txt` in the working directory.
 
+### Rclone
+
+[dir-sync.sh](dir-sync.sh)
+
+Uses rclone to sync a directory between Apocrita and Sharepoint. Expects that 
+rclone is configured with the QMUL Sharepoint Documents directory named
+`sharepoint-qmul`
+
+`qsub ~/checkouts/uge-job-scripts/dir-sync.sh [dir]`
+
+[dir-copy-from-sharepoint.sh](dir-copy-from-sharepoint.sh)
+
+Uses rclone to copy the contents of a directory from Sharepoint to Apocrita.
+Expects that rclone is configured with the QMUL Sharepoint Documents directory 
+named `sharepoint-qmul`
+
+`qsub ~/checkouts/uge-job-scripts/dir-copy-from-sharepoint.sh [dir]`
+
+[dir-copy-from-sharepoint-with-filter.sh](dir-copy-from-sharepoint-with-filter.sh)
+
+Uses rclone to copy files matching a filter string from Sharepoint to Apocrita.
+Expects that rclone is configured with the QMUL Sharepoint Documents directory 
+named `sharepoint-qmul`
+
+`qsub ~/checkouts/uge-job-scripts/dir-copy-from-sharepoint.sh [dir] [filter_string]`
 
 ## Ensembl
 

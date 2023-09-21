@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# dir-copy-from-sharepoint.sh - Script to scopy the contents of a directory from Sharepoint to Apocrita
+# dir-copy-from-sharepoint.sh - Script to copy the contents of a directory from Sharepoint to Apocrita
 #$ -cwd
 #$ -pe smp 1
 #$ -l h_rt=240:0:0
