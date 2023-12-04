@@ -22,11 +22,11 @@ Expects a file named `md5sum.txt` in the working directory.
 
 [dir-sync.sh](dir-sync.sh)
 
-Uses rclone to sync a directory between Apocrita and Sharepoint. Expects that 
-rclone is configured with the QMUL Sharepoint Documents directory named
-`sharepoint-qmul`
+Uses rclone to sync a directory between Apocrita and Sharepoint.
+First argument is the directory
+Second is the name of the rclone remote [Default: sharepoint-qmul-buschlab]
 
-`qsub ~/checkouts/uge-job-scripts/dir-sync.sh [dir]`
+`qsub ~/checkouts/uge-job-scripts/dir-sync.sh [dir] [remote]`
 
 [dir-copy-from-sharepoint.sh](dir-copy-from-sharepoint.sh)
 

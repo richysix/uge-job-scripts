@@ -10,14 +10,19 @@
 module load rclone/1.62.2
 
 dir=$1
+remote=$2
+if [[ -z $remote ]]; then
+    remote="sharepoint-qmul-buschlab"
+fi
+
 echo "Starting $drive sync 1" 1>&2
-rclone sync $dir sharepoint-qmul:$dir/ --include "*.{doc,docx,xls,xlsx,xlsm,ppt,pptx,html,png}" --ignore-size --ignore-checksum --drive-acknowledge-abuse
+rclone sync $dir $remote:$dir/ --include "*.{doc,docx,xls,xlsx,xlsm,ppt,pptx,html,png}" --ignore-size --ignore-checksum --drive-acknowledge-abuse
 echo "Starting $dir check 1" 1>&2
-rclone check $dir sharepoint-qmul:$dir/ --include "*.{doc,docx,xls,xlsx,xlsm,ppt,pptx,html,png}" --ignore-size --ignore-checksum --drive-acknowledge-abuse
+rclone check $dir $remote:$dir/ --include "*.{doc,docx,xls,xlsx,xlsm,ppt,pptx,html,png}" --ignore-size --ignore-checksum --drive-acknowledge-abuse
 echo "Starting $dir sync 2" 1>&2
-rclone sync $dir sharepoint-qmul:$dir/ --exclude "*.{doc,docx,xls,xlsx,xlsm,ppt,pptx,html,png}" --drive-acknowledge-abuse
+rclone sync $dir $remote:$dir/ --exclude "*.{doc,docx,xls,xlsx,xlsm,ppt,pptx,html,png}" --drive-acknowledge-abuse
 echo "Starting $dir check 2" 1>&2
-rclone check $dir sharepoint-qmul:$dir/ --exclude "*.{doc,docx,xls,xlsx,xlsm,ppt,pptx,html,png}" --drive-acknowledge-abuse
+rclone check $dir $remote:$dir/ --exclude "*.{doc,docx,xls,xlsx,xlsm,ppt,pptx,html,png}" --drive-acknowledge-abuse
 
 module unload rclone/1.62.2
 
