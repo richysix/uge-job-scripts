@@ -20,6 +20,15 @@ Expects a file named `md5sum.txt` in the working directory.
 
 ### Rclone
 
+[dir-backup.sh](dir-backup.sh)
+
+Uses rclone to backup a directory between Apocrita and Sharepoint using
+`rclone copy`.
+First argument is the directory
+Second is the name of the rclone remote [Default: sharepoint-qmul-buschlab]
+
+`qsub ~/checkouts/uge-job-scripts/dir-backup.sh [dir] [remote]`
+
 [dir-sync.sh](dir-sync.sh)
 
 Uses rclone to sync a directory between Apocrita and Sharepoint.
