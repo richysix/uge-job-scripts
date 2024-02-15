@@ -79,6 +79,12 @@ This runs [get_features_for_genes.pl](https://github.com/richysix/analysis-paral
 
 This runs [get_features_for_genes.pl](https://github.com/richysix/analysis-paralogs/blob/main/get_features_for_genes.pl) as a job array in the directory in which the `qsub` command is executed. Run `get_features_for_genes-array.sh -h` to see options for setting the Ensembl version, species and output file name. The array task id is added to the output filename. The default number of array tasks is 10. This can be overridden by adding the `-t` option directly to the `qsub` command.
 
+### Dump exon and intron data
+
+[dump_exons_and_introns.sh](dump_exons_and_introns.sh)
+
+This runs [dump_exons_and_introns.pl](https://github.com/richysix/Crispr/blob/master/scripts/dump_exons_and_introns.pl), which outputs all the exons and introns for a species. The first argument should be a species name. The second is the name of the output file and is optional. If no filename is given, output will be to STDOUT.
+
 ## GATK
 
 ### Run GATK ASEReadCounter

@@ -10,8 +10,14 @@
 module load Crispr/0.1.22
 
 species=$1
+outfile=$2
+if [[ -n $outfile ]]; then
+  out_option="--output_file $outfile"
+else
+  out_option=""
+fi
 
-dump_exons_and_introns.pl $species
+dump_exons_and_introns.pl $out_option $species
 
 module unload Crispr/0.1.22
 
