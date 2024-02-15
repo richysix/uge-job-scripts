@@ -280,3 +280,11 @@ e.g.
 qsub bigWigToBedGraph.sh wgEncodeCrgMapabilityAlign50mer.bigWig wgEncodeCrgMapabilityAlign50mer.bedGraph
 ```
 
+## Crispr
+
+### Run crispr command
+
+[run-crispr-script.sh](run-crispr-script.sh)
+
+This runs an arbitrary command that uses the Crispr modules. It expects an argument that is the name of a file that contains the command.
+Optionally you can also specific the version of Crispr to run with `-c` option.
