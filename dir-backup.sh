@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# dir-backup.sh - Script to sync a directory to Sharepoint
+# dir-backup.sh - Script to backup a directory to Sharepoint
 #$ -cwd
 #$ -pe smp 1
 #$ -l h_rt=240:0:0
@@ -7,7 +7,33 @@
 #$ -o copy.o
 #$ -e copy.e
 
-module load rclone/1.62.2
+source bash_functions.sh
+
+USAGE="dir-backup.sh [options] dir remote"
+
+OPTIONS="Options:
+    -r    Rclone version
+    -d    print debugging info
+    -q    turn verbose output off
+    -h    print help info"
+
+# default values
+debug=0
+verbose=1
+RCLONE_VERSION='1.65.2'
+while getopts ":r:dhq" opt; do
+  case $opt in
+    r)  RCLONE_VERSION=$OPTARG ;;
+    d)  debug=1  ;;
+    h)  usage "" ;;
+    q)  verbose=0 ;;
+    \?) usage "Invalid option: -$OPTARG" ;;
+    :)  usage "Option -$OPTARG requires an argument!" ;;
+  esac
+done
+shift "$(($OPTIND -1))"
+
+module load rclone/$RCLONE_VERSION
 
 dir=$1
 remote=$2
@@ -15,7 +41,7 @@ if [[ -z $remote ]]; then
     remote="sharepoint-qmul-buschlab"
 fi
 
-echo "Starting $drive backup 1" 1>&2
+echo "Starting $dir backup 1" 1>&2
 rclone copy $dir $remote:$dir/ --include "*.{doc,docx,xls,xlsx,xlsm,ppt,pptx,html,png}" \
 --ignore-size --ignore-checksum --drive-acknowledge-abuse --update
 
