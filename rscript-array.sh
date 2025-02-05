@@ -23,7 +23,7 @@ OPTIONS="Options:
 # default values
 debug=0
 verbose=1
-R_VERSION=4.2.1
+R_VERSION=4.4.0
 while getopts ":r:dhqv" opt; do
   case $opt in
     r)  R_VERSION=$OPTARG  ;;
