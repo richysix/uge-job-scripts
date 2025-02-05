@@ -12,6 +12,7 @@ source bash_functions.sh
 USAGE="dir-backup.sh [options] dir remote"
 
 OPTIONS="Options:
+    -b    base_dir
     -r    Rclone version
     -d    print debugging info
     -q    turn verbose output off
@@ -21,8 +22,10 @@ OPTIONS="Options:
 debug=0
 verbose=1
 RCLONE_VERSION='1.65.2'
-while getopts ":r:dhq" opt; do
+BASE_DIR=""
+while getopts ":b:r:dhq" opt; do
   case $opt in
+    b)  BASE_DIR=$OPTARG ;;
     r)  RCLONE_VERSION=$OPTARG ;;
     d)  debug=1  ;;
     h)  usage "" ;;
@@ -41,15 +44,35 @@ if [[ -z $remote ]]; then
     remote="sharepoint-qmul-buschlab"
 fi
 
+if [[ -z $BASE_DIR ]]; then
+  remote_dir=$dir
+else
+  remote_dir="$BASE_DIR/$dir"
+fi
+
+if [[ $verbose -eq 1 ]]; then
+  VERBOSE="--progress"
+else
+  VERBOSE=""
+fi
+
+if [[ $debug -eq 1 ]]; then
+  echo "Dir: $dir
+Remote name: $remote
+Base Dir: $BASE_DIR
+Remote Dir: $remote_dir
+Verbose opt: $VERBOSE" 1>&2
+fi
+
 echo "Starting $dir backup 1" 1>&2
-rclone copy $dir $remote:$dir/ --include "*.{doc,docx,xls,xlsx,xlsm,ppt,pptx,html,png}" \
+rclone copy $VERBOSE $dir $remote:$remote_dir/ --include "*.{doc,docx,xls,xlsx,xlsm,ppt,pptx,html,png}" \
 --ignore-size --ignore-checksum --drive-acknowledge-abuse --update
 
 echo "Starting $dir backup 2" 1>&2
-rclone copy $dir $remote:$dir/ --exclude "*.{doc,docx,xls,xlsx,xlsm,ppt,pptx,html,png}" \
+rclone copy $VERBOSE $dir $remote:$remote_dir/ --exclude "*.{doc,docx,xls,xlsx,xlsm,ppt,pptx,html,png}" \
 --drive-acknowledge-abuse --update
 
-module unload rclone/1.62.2
+module unload rclone/$RCLONE_VERSION
 
 # AUTHOR
 #
