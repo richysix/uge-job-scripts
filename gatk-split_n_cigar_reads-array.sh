@@ -6,6 +6,7 @@
 #$ -l h_rt=240:0:0
 #$ -l h_vmem=4G
 #$ -t 1-96
+#$ -l rocky
 
 USAGE="gatk-split_n_cigar_reads-array.sh"
 

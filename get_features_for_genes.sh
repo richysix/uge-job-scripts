@@ -3,6 +3,7 @@
 #$ -pe smp 1
 #$ -l h_rt=1:0:0
 #$ -l h_vmem=100M
+#$ -l rocky
 
 USAGE="get_features_for_genes.sh [options] input_file"
 

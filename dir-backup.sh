@@ -6,6 +6,7 @@
 #$ -l h_vmem=1G
 #$ -o copy.o
 #$ -e copy.e
+#$ -l rocky
 
 source bash_functions.sh
 

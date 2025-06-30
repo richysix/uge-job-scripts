@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# rscript-array.sh - Script to run a file of Rscript commands as an array job
-# It loads the R module and then runs a single line based on the TASK_ID
+# python-array.sh - Script to run a file of Python commands as an array job
+# It loads the Python module and then runs a single line based on the TASK_ID
 # from a supplied file. Filename is the argument to the script.
 # The second argument is an optional job name for the success/failure message
 #$ -cwd
@@ -12,10 +12,10 @@
 
 source bash_functions.sh
 
-USAGE="rscript-array.sh [options] file job_name"
+USAGE="python-array.sh [options] file job_name"
 
 OPTIONS="Options:
-    -r    R version
+    -p    Python version [default: 3.12.4]
     -d    print debugging info
     -v    verbose output
     -q    turn verbose output off
@@ -24,10 +24,10 @@ OPTIONS="Options:
 # default values
 debug=0
 verbose=1
-R_VERSION=4.4.0
-while getopts ":r:dhqv" opt; do
+PYTHON_VERSION='3.12.4'
+while getopts ":p:dhqv" opt; do
   case $opt in
-    r)  R_VERSION=$OPTARG  ;;
+    p)  PYTHON_VERSION=$OPTARG  ;;
     d)  debug=1  ;;
     h)  usage "" ;;
     v)  verbose=1 ;;
@@ -38,8 +38,8 @@ while getopts ":r:dhqv" opt; do
 done
 shift "$(($OPTIND -1))"
 
-R_VERSION=$( echo $R_VERSION | sed -e 's|^R/||' )
-module load R/$R_VERSION
+PYTHON_VERSION=$( echo $PYTHON_VERSION | sed -e 's|^Python/||' )
+module load Python/$PYTHON_VERSION
 
 if [[ -z $2 ]]; then
     JOB=${JOB_NAME}
@@ -48,7 +48,7 @@ else
 fi
 
 if [[ $debug -gt 0 ]]; then
-    echo "R version = $R_VERSION
+    echo "Python version = $PYTHON_VERSION
 Input file: $1
 Job name: $JOB"
 fi
@@ -67,7 +67,7 @@ exit $SUCCESS
 #
 # COPYRIGHT AND LICENSE
 #
-# This software is Copyright (c) 2023. Queen Mary University of London.
+# This software is Copyright (c) 2024. Queen Mary University of London.
 #
 # This is free software, licensed under:
 #

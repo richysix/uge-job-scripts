@@ -1,38 +1,31 @@
 #!/usr/bin/env bash
-# htseq-count-array.sh - UGE script to run htseq-count as an array job
-# expects a file with up to 3 columns
-# Name of input bam file
-# Name of output sam file. The sam file contains a flag to indicate whether or
-# not the read was counted and if not, why not 
-# Name of annotation GTF file to use
-# If using a custom GTF file but you don't want an output sam file, set the
-# second column to NULL
+# run-topgo.sh - Script to run a TopGO enrichment
 #$ -cwd
 #$ -pe smp 1
-#$ -l h_rt=1:0:0
-#$ -l h_vmem=1G
-#$ -t 1-96
+#$ -l h_rt=240:0:0
+#$ -l h_vmem=2G
+#$ -t 1-10
 #$ -l rocky
 
 source bash_functions.sh
 
-USAGE="htseq-count-array.sh [options] input_file"
+USAGE="run-topgo.sh [options] cmd_file"
 
 OPTIONS="Options:
+    -e    Ensembl version
     -d    print debugging info
-    -v    verbose output
     -q    turn verbose output off
     -h    print help info"
 
 # default values
 debug=0
 verbose=1
-
-while getopts ":dhqv" opt; do
+ENSEMBL_VERSION='99'
+while getopts ":e:s:dhqv" opt; do
   case $opt in
+    e)  ENSEMBL_VERSION=$OPTARG ;;
     d)  debug=1  ;;
     h)  usage "" ;;
-    v)  verbose=1 ;;
     q)  verbose=0 ;;
     \?) usage "Invalid option: -$OPTARG" ;;
     :)  usage "Option -$OPTARG requires an argument!" ;;
@@ -40,12 +33,17 @@ while getopts ":dhqv" opt; do
 done
 shift "$(($OPTIND -1))"
 
-# unpack arguments
-in_file=$1
+module load topgo-wrapper/$ENSEMBL_VERSION
+
 line=`sed "${SGE_TASK_ID}q;d" $in_file`
 in_bam=`echo $line | awk '{ print $1 }'`
 out_sam=`echo $line | awk '{ print $2 }'`
 annotation=`echo $line | awk '{ print $3 }'`
+
+# run script
+run_topgo.pl \
+--dir $dir --detct_file $file
+
 
 if [[ $debug -eq 1 ]]; then
     echo $in_bam $out_sam $annotation
@@ -74,7 +72,7 @@ error_checking $SUCCESS "job htseq-count, task ${SGE_TASK_ID} SUCCEEDED." "job h
 #
 # COPYRIGHT AND LICENSE
 #
-# This software is Copyright (c) 2023. Queen Mary University of London.
+# This software is Copyright (c) 2024. Queen Mary University of London.
 #
 # This is free software, licensed under:
 #

@@ -4,6 +4,7 @@
 #$ -l h_rt=240:0:0
 #$ -l h_vmem=4.4G
 #$ -t 1
+#$ -l rocky
 
 # gatk-ase-array.sh - Script to run GATK ASEReadCounter tool using UGE
 

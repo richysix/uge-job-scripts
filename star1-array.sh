@@ -6,6 +6,7 @@
 #$ -l h_rt=1:0:0
 #$ -l h_vmem=24G
 #$ -t 1-96
+#$ -l rocky
 
 USAGE="star1-array.sh"
 

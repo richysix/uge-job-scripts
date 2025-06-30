@@ -6,6 +6,7 @@
 #$ -l h_rt=240:0:0
 #$ -l h_vmem=24G
 #$ -t 1-96
+#$ -l rocky
 
 USAGE="star2-array.sh [options]"
 

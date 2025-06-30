@@ -10,6 +10,7 @@
 #$ -pe smp 1
 #$ -l h_rt=1:0:0
 #$ -l h_vmem=24G
+#$ -l rocky
 
 USAGE="star1.sh LINE_NUM"
 

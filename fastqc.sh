@@ -3,6 +3,7 @@
 #$ -pe smp 12
 #$ -l h_rt=1:0:0
 #$ -l h_vmem=275M
+#$ -l rocky
 
 module load FastQC
 

@@ -6,6 +6,7 @@
 #$ -l h_vmem=1G
 #$ -o annotation.o
 #$ -e annotation.e
+#$ -l rocky
 
 module load Crispr/0.1.22
 

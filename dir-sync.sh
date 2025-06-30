@@ -6,6 +6,7 @@
 #$ -l h_vmem=1G
 #$ -o sync.o
 #$ -e sync.e
+#$ -l rocky
 
 module load rclone/1.62.2
 

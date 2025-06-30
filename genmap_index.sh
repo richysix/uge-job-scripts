@@ -4,6 +4,7 @@
 #$ -pe smp 1
 #$ -l h_rt=1:0:0
 #$ -l h_vmem=12G
+#$ -l rocky
 
 USAGE="genmap_index.sh genome_fasta_file output_dir"
 

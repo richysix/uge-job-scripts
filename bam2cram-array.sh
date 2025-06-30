@@ -5,6 +5,7 @@
 #$ -l h_rt=1:0:0
 #$ -l h_vmem=1G
 #$ -t 1-10
+#$ -l rocky
 
 source bash_functions.sh
 

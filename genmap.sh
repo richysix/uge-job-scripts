@@ -4,6 +4,7 @@
 #$ -pe smp 8
 #$ -l h_rt=240:0:0
 #$ -l h_vmem=1G
+#$ -l rocky
 
 USAGE="genmap.sh [options] genome_index_dir output_dir"
 

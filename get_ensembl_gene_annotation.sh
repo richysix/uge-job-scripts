@@ -5,6 +5,7 @@
 #$ -l h_vmem=1G
 #$ -o get_ensembl_gene_annotation.o
 #$ -e get_ensembl_gene_annotation.e
+#$ -l rocky
 
 USAGE="get_ensembl_gene_annotation.sh [options]"
 

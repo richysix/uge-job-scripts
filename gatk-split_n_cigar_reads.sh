@@ -3,6 +3,7 @@
 #$ -pe smp 1
 #$ -l h_rt=1:0:0
 #$ -l h_vmem=4G
+#$ -l rocky
 
 # gatk-split_n_cigar_reads.sh - Script to run GATK ASEReadCounter tool using UGE
 

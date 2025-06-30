@@ -4,6 +4,7 @@
 #$ -pe smp 1
 #$ -l h_rt=240:0:0
 #$ -l h_vmem=1G
+#$ -l rocky
 
 module load MultiQC/1.10.1
 

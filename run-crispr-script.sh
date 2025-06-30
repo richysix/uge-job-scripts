@@ -7,6 +7,7 @@
 #$ -l h_vmem=4G
 #$ -o crRNA-scored.o
 #$ -e crRNA-scored.e
+#$ -l rocky
 
 source bash_functions.sh
 

@@ -4,6 +4,7 @@
 #$ -pe smp 4
 #$ -l h_rt=240:0:0
 #$ -l h_vmem=8G
+#$ -l rocky
 
 # AUTHOR
 #
